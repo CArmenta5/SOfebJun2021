@@ -19,6 +19,7 @@
 //     and needs to be written to disk.
 
 #include "types.h"
+
 #include "defs.h"
 #include "param.h"
 #include "spinlock.h"
@@ -32,6 +33,7 @@ struct {
 
   // Linked list of all buffers, through prev/next.
   // head.next is most recently used.
+ //Checking changes
   struct buf head;
 } bcache;
 
