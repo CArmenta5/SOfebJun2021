@@ -82,6 +82,7 @@ argstr(int n, char **pp)
   return fetchstr(addr, pp);
 }
 
+//Comp de c se que no la has importado, pero cuando juntes todo habrá esa función, me traigo la función, y hasta la utima etapa la va a encontrar
 extern int sys_chdir(void);
 extern int sys_close(void);
 extern int sys_dup(void);
@@ -103,7 +104,10 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
+extern int sys_shutdown(void);
+extern int sys_reboot(void);
 
+//funciones que no reciben nada y regresan un entero
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
 [SYS_exit]    sys_exit,
@@ -126,6 +130,8 @@ static int (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
+[SYS_shutdown]   sys_shutdown,
+[SYS_reboot]   sys_reboot,
 };
 
 void
