@@ -7,7 +7,7 @@ int main(){
     char minC;
     char mayC;
     
-    while(read(0,&minC,1)){
+    while(read(0,&minC,1)){//entrada standar
         mayC =toupper(minC);
         write(1,&mayC,1);
     }

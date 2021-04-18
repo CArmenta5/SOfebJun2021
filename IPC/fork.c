@@ -10,8 +10,8 @@ void signalHandler(int sig){
 
 }
 int main(){
-    signal(17,signalHandler);
-    int pid = fork();
+    signal(17,signalHandler); // recibe la señal cuando termine el hijo
+    int pid = fork(); // guardamos el id del proceso
     int pidHijoTermino;
     if(pid == 0){
         //Proceso hijo
@@ -19,7 +19,8 @@ int main(){
     }else{
         
         printf ("Soy el proceso padre y mi hijo es %d\n",pid);
-        //pidHijoTermino = wait(NULL); //Aseguro de ya no tener a los zombies
+        //pidHijoTermino = wait(NULL); //Aseguro de ya no tener a los zombies de manera asincrona, ya que el proceso padre se espera a que su hijo termine
+
         while(1){
             printf("Trabajando\n");
             sleep(1);
