@@ -28,12 +28,15 @@ main(void)
       exit();
     }
     if(pid == 0){
-		// 1) En la primera modificación existe un loop infinito donde muestra el directorio y muestra todos los archivos que se pueden ejecutar.
-		//2) En la segunda modificación el init intenta ejecutar el sh, el exec regresa el fail y el init manda un mensaje que dice que el exec sh ha fallado"
+		// 1) En la primera modificación existe un loop infinito donde muestra el directorio y muestra todos los archivos que se pueden ejecutar, sale del wait.
+		//2) En la segunda modificación el init intenta ejecutar el sh, el exec regresa el fail y el init manda un mensaje que dice que el exec sh ha fallado, el sistema operativo intenta buscar el programa y falla
       exec("sh", argv);
+      // Si todo funciona esta parte del código no debería de ejecutarse
       printf(1, "init: exec sh failed\n");
       exit();
     }
+    // en el proceso padre se está esperando por un cambio en el proceso hijo, si llega a fallar, despierta y crea otro 
+    // durmiendo hasta que termina o muere
     while((wpid=wait()) >= 0 && wpid != pid)
       printf(1, "zombie!\n");
   }

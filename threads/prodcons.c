@@ -5,11 +5,11 @@
 
 #define MAX_RECORDS 20
 
-int buffer[MAX_RECORDS];
-sem_t empty;
+int buffer[MAX_RECORDS]; // buffer global que compartiran ambos hilos
+sem_t empty; // semaforo
 sem_t fill;
 
-
+//función de ese tipo void * referencia pura, podemos recibir cualquier cosa
 void *producer(void *d) {  // prototipo de pthread
     int pos = 0;
     while(1){
@@ -19,6 +19,8 @@ void *producer(void *d) {  // prototipo de pthread
         sleep(1); // tiempo para producir el valor
         sem_post(&fill); // incrementar fill
     }  
+        pthread_exit(NULL);
+
 }
 void *consumer(void *d) {  
     int pos = 0;
@@ -36,11 +38,15 @@ void *consumer(void *d) {
 
 int main(){
     //semáforo, 0-entre hilos, 1-entre procesos
-    sem_init(&empty,0,MAX_RECORDS);
+    /*Inicializo semaforos*/
+    // semaforo a inicializar, tipo de semaforo, records vacios
+    sem_init(&empty,0,MAX_RECORDS);  
     sem_init(&fill,0,0);
+    
     pthread_t producerThread, consumerThread;
-    pthread_create(&producerThread, NULL, producer,NULL );
+    /*Creación de hilos*/
+    pthread_create(&producerThread, NULL, producer,NULL ); 
     pthread_create(&consumerThread, NULL, consumer,NULL );
 
-      pthread_exit(NULL);
+    pthread_exit(NULL);
 }

@@ -7,7 +7,6 @@
 
 void signalHandler(int sig){
     exit(0);
-
 }
 
 int main()
@@ -80,8 +79,8 @@ int main()
                    
                     // read child process output
                     fscanf(in, "%f", &salidaDato);
-                        fflush(in);
-                        sum += salidaDato;
+                    fflush(in);
+                    sum += salidaDato;
                     
                    
                     
