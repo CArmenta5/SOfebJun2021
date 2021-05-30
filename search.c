@@ -17,9 +17,6 @@ int main(int argc, char **argv) {
   char *filename = argv[1];
   char *atrubuto = argv[2];
   char *palabra = argv[3];
-  int cuantos= atoi(argv[2]);
-  int result;
-
   FILE *forigen;
   forigen = fopen(filename,"rb");
   STUDENT newstudent;
